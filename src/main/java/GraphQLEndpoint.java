@@ -2,6 +2,8 @@ import com.coxautodev.graphql.tools.SchemaParser;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.SimpleGraphQLServlet;
 import repository.LinkRepository;
+import resolver.Mutation;
+import resolver.Query;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -16,7 +18,7 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
         LinkRepository linkRepository = new LinkRepository();
         return SchemaParser.newParser()
                 .file("schema.graphqls")
-                .resolvers(new Query(linkRepository))
+                .resolvers(new Query(linkRepository), new Mutation(linkRepository))
                 .build()
                 .makeExecutableSchema();
     }
