@@ -7,7 +7,7 @@ import pojo.Link;
 
 public class Functions {
     public static DBObject toDBObject(Link link) {
-        return new BasicDBObject("_id", link.getId())
+        return new BasicDBObject("_id", "999")
                 .append("url", link.getUrl())
                 .append("description", link.getDescription());
     }

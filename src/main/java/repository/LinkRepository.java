@@ -1,5 +1,6 @@
 package repository;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
@@ -36,7 +37,7 @@ public class LinkRepository {
             while(cursor.hasNext()){
                 DBObject obj = cursor.next();
                 logger.info("CURSOR: " + obj.toString());
-                Link link = new Link("", obj.get("url").toString(), obj.get("description").toString());
+                Link link = new Link(obj.get("url").toString(), obj.get("description").toString());
                 links.add(link);
             }
         }catch (Exception e){
@@ -47,7 +48,10 @@ public class LinkRepository {
     }
 
     public void saveLink(Link link) {
-        //links.add(link);
-        //Save and view..
+        logger.info("Saving to Link: " + link.getUrl() + ", " + link.getDescription());
+        //Insert a new Link.
+        DBObject linkObject = Functions.toDBObject(link);
+        logger.info("After converting to DBObject: ", linkObject.get("url"));
+        collection.insert(linkObject);
     }
 }
