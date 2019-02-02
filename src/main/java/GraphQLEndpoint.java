@@ -10,12 +10,13 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet(urlPatterns = "/graphql")
 public class GraphQLEndpoint extends SimpleGraphQLServlet {
 
+    private static LinkRepository linkRepository = new LinkRepository();
+
     public GraphQLEndpoint() {
         super(buildSchema());
     }
 
     private static GraphQLSchema buildSchema() {
-        LinkRepository linkRepository = new LinkRepository();
         return SchemaParser.newParser()
                 .file("schema.graphqls")
                 .resolvers(new Query(linkRepository), new Mutation(linkRepository))
