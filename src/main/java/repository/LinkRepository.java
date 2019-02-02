@@ -36,9 +36,7 @@ public class LinkRepository {
             collection = MongoDB.connect();
             List<DBObject> cursor = collection.find().toArray();
             for(DBObject obj : cursor){
-                logger.info("CURSOR: " + obj.toString());
                 ObjectId id = new ObjectId(obj.get("_id").toString());
-                System.out.println("objectID : " + id);
                 Link link = new Link(id,obj.get("url").toString(), obj.get("description").toString());
                 links.add(link);
             }
@@ -50,12 +48,16 @@ public class LinkRepository {
     }
 
     public void saveLink(Link link) {
-        logger.info("Saving to Link: " + link.getUrl() + ", " + link.getDescription());
-        //Insert a new Link.
-        ObjectId id = new ObjectId();
-        link.set_id(id); // New ID for the new Link.
-        DBObject linkObject = Functions.toDBObject(link);
-        logger.info("After converting to DBObject: ", linkObject.get("url"));
-        collection.insert(linkObject);
+        try{
+            //Insert a new Link.
+            ObjectId id = new ObjectId();
+            link.set_id(id); // New ID for the new Link.
+            logger.info("Saving Link to DB: " + link.toString());
+            DBObject linkObject = Functions.toDBObject(link);
+            collection.insert(linkObject);
+        } catch (Exception e){
+            e.printStackTrace();
+            logger.error("Error while saving to DB: " + e.getMessage());
+        }
     }
 }
