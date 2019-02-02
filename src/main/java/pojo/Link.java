@@ -1,20 +1,34 @@
 package pojo;
 
+import org.bson.types.ObjectId;
+
 public class Link {
 
-    //private final String _id;
-    private final String url;
-    private final String description;
+    private ObjectId _id;
+    private String url;
+    private String description;
 
-    public Link(String url, String description) {
-        //this._id = _id;
+    //Used in getAllLinks();
+    public Link(ObjectId _id, String url, String description) {
+        this._id = _id;
         this.url = url;
         this.description = description;
     }
 
-    //public String get_id() {
-        //return _id;
-    //}
+    //Used in createLink();
+    public Link(String url, String description) {
+        this._id = new ObjectId();
+        this.url = url;
+        this.description = description;
+    }
+
+    public void set_id(ObjectId id){
+        this._id = id;
+    }
+
+    public ObjectId get_id() {
+        return _id;
+    }
 
     public String getUrl() {
         return url;
@@ -27,7 +41,7 @@ public class Link {
     @Override
     public String toString() {
         return "Link{" +
-                //"_id='" + _id + '\'' +
+                "_id='" + _id + '\'' +
                 ", url='" + url + '\'' +
                 ", description='" + description + '\'' +
                 '}';
