@@ -27,8 +27,6 @@ public class PersonRepository {
             List<DBObject> cursor = collection.find().toArray();
             for(DBObject obj : cursor){
                 ObjectId id = new ObjectId(obj.get("_id").toString());
-                System.out.println("Person Object: ");
-                obj.keySet().forEach(f -> System.out.println("f.toString(): " + f));
                 Person person = new Person(id, obj.get("name").toString(), obj.get("job").toString(), obj.get("address").toString());
                 allPersons.add(person);
             }
@@ -44,7 +42,6 @@ public class PersonRepository {
             //Insert a new Link.
             ObjectId id = new ObjectId();
             person.set_id(id); // New ID for the new Person.
-            logger.info("Saving Person to DB: " + person.toString());
             DBObject personObject = Functions.toDBObject(person);
             collection.insert(personObject);
         } catch (Exception e){
