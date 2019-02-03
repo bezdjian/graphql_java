@@ -11,7 +11,7 @@ type Person {
 
 type Query {
     allLinks: [Link]
-    allPersons: [Person]
+    allPersons(name: String!): [Person]
 }
 
 type Mutation {

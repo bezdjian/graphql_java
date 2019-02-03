@@ -1,5 +1,6 @@
 package repository;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import helpers.Functions;
@@ -21,10 +22,15 @@ public class PersonRepository {
         this.collection = collection;
     }
 
-    public List<Person> getAllPersons() {
+    public List<Person> getAllPersons(String name) {
         List<Person> allPersons = new ArrayList<>();
         try{
-            List<DBObject> cursor = collection.find().toArray();
+            BasicDBObject query = new BasicDBObject();
+            if(name != null && !name.isEmpty()){
+                logger.info("Adding " + name + " in the query");
+                query.append("name", name);
+            }
+            List<DBObject> cursor = collection.find(query).toArray();
             for(DBObject obj : cursor){
                 ObjectId id = new ObjectId(obj.get("_id").toString());
                 Person person = new Person(id, obj.get("name").toString(), obj.get("job").toString(), obj.get("address").toString());

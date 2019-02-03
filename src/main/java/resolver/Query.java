@@ -22,7 +22,7 @@ public class Query implements GraphQLRootResolver {
         return linkRepository.getAllLinks();
     }
 
-    public List<Person> allPersons(){
-        return personRepository.getAllPersons();
+    public List<Person> allPersons(String name){
+        return personRepository.getAllPersons(name);
     }
 }
