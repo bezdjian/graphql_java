@@ -3,12 +3,20 @@ type Link {
     description: String!
 }
 
+type Person {
+    name: String!
+    job: String!
+    address: String!
+}
+
 type Query {
     allLinks: [Link]
+    allPersons: [Person]
 }
 
 type Mutation {
     createLink(url: String!, description: String!): Link
+    #createPerson(name: String!, job: String!, address: Address!)
 }
 
 schema {

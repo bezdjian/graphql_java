@@ -13,15 +13,15 @@ public class MongoDB {
 
     private static final Logger logger = LoggerFactory.getLogger(MongoDB.class);
 
-    public static DBCollection connect(){
+    public static DBCollection connect(String collectionName){
         DBCollection collection = null;
         try {
             MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
             DB database = mongoClient.getDB("graphql_db");
-            collection = database.getCollection("graphql_c");
+            collection = database.getCollection(collectionName);
         } catch (UnknownHostException e) {
             e.printStackTrace();
-            logger.error("Error accured when connecting to databse: " + e.getMessage());
+            logger.error("Error accured when connecting to Links collection: " + e.getMessage());
         }
         return collection;
     }
