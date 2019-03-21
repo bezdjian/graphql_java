@@ -45,7 +45,7 @@ public class PersonRepository {
 
     public void savePerson(Person person) {
         try{
-            //Insert a new Link.
+            //Insert a new person.
             ObjectId id = new ObjectId();
             person.set_id(id); // New ID for the new Person.
             DBObject personObject = Functions.toDBObject(person);

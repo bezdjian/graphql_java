@@ -2,7 +2,6 @@ package repository;
 
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import db.MongoDB;
 import helpers.Functions;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;

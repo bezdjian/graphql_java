@@ -21,7 +21,7 @@ public class MongoDB {
             collection = database.getCollection(collectionName);
         } catch (UnknownHostException e) {
             e.printStackTrace();
-            logger.error("Error accured when connecting to Links collection: " + e.getMessage());
+            logger.error("Error accured when connecting to MongoDB: " + e.getMessage());
         }
         return collection;
     }
