@@ -6,6 +6,8 @@ import pojo.Person;
 import repository.LinkRepository;
 import repository.PersonRepository;
 
+import java.util.List;
+
 public class Mutation implements GraphQLRootResolver {
 
     private final LinkRepository linkRepository;
@@ -26,5 +28,10 @@ public class Mutation implements GraphQLRootResolver {
         Person person = new Person(name, job, address);
         personRepository.savePerson(person);
         return person;
+    }
+
+    public List<Link> deleteLink(String url){
+        linkRepository.deleteLink(url);
+        return linkRepository.getAllLinks();
     }
 }

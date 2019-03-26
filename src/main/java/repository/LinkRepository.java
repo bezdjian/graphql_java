@@ -1,5 +1,6 @@
 package repository;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import helpers.Functions;
@@ -49,6 +50,15 @@ public class LinkRepository {
         } catch (Exception e){
             e.printStackTrace();
             logger.error("Error while saving to DB: " + e.getMessage());
+        }
+    }
+
+    public void deleteLink(String url){
+        BasicDBObject query = new BasicDBObject();
+        if(url != null && !url.isEmpty()){
+            query.append("url", url);
+            //List<DBObject> link = collection.find(query).toArray();
+            collection.remove(query);
         }
     }
 }
