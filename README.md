@@ -1,7 +1,7 @@
 # graphql
 GraphQL learning
 <br>
-Requires MongoDB with 'link' and 'person' collections.
+Requires MongoDB with DB name graphql_db and 'link' and 'person' collections.
 
 # Run the app
  $ mvn jetty:run
