@@ -2,6 +2,4 @@
 GraphQL learning
 
 # Run the app
-'''
- mvn jetty:run
-'''
+ $ mvn jetty:run
