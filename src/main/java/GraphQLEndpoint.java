@@ -26,7 +26,7 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
         DBCollection collectionLink = MongoDB.connect("link");
         DBCollection collectionPersons = MongoDB.connect("person");
         linkRepository = new LinkRepository(collectionLink);
-        personRepository  = new PersonRepository(collectionPersons);
+        personRepository = new PersonRepository(collectionPersons);
     }
 
     public GraphQLEndpoint() {
@@ -34,19 +34,17 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
     }
 
     private static GraphQLSchema buildSchema() {
-        return SchemaParser.newParser()
-                .file("schema.graphqls")
-                .resolvers(new Query(linkRepository, personRepository),
-                        new Mutation(linkRepository, personRepository))
-                .build()
-                .makeExecutableSchema();
+        return SchemaParser.newParser().file("schema.graphqls")
+                .resolvers(new Query(linkRepository, personRepository), new Mutation(linkRepository, personRepository))
+                .build().makeExecutableSchema();
     }
 
     @Override
-    protected List<GraphQLError> filterGraphQLErrors(List<GraphQLError> errors){
+    protected List<GraphQLError> filterGraphQLErrors(List<GraphQLError> errors) {
         System.out.println("HEREEEEEE");
         return errors.stream()
-                //.filter(e -> e instanceof ExceptionWhileDataFetching || super.isClientError(e))
+                // .filter(e -> e instanceof ExceptionWhileDataFetching ||
+                // super.isClientError(e))
                 .map(e -> e instanceof GraphQLException ? new SanitizedError((ExceptionWhileDataFetching) e) : e)
                 .collect(Collectors.toList());
     }
