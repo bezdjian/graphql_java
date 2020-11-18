@@ -1,3 +1,5 @@
+package web;
+
 import com.coxautodev.graphql.tools.SchemaParser;
 import com.mongodb.DBCollection;
 import db.MongoDB;
@@ -7,6 +9,7 @@ import graphql.GraphQLError;
 import graphql.GraphQLException;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.SimpleGraphQLServlet;
+import lombok.extern.slf4j.Slf4j;
 import repository.LinkRepository;
 import repository.PersonRepository;
 import resolver.Mutation;
@@ -17,10 +20,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = "/graphql")
+@Slf4j
 public class GraphQLEndpoint extends SimpleGraphQLServlet {
 
-    private static LinkRepository linkRepository;
-    private static PersonRepository personRepository;
+    private static final LinkRepository linkRepository;
+    private static final PersonRepository personRepository;
 
     static {
         DBCollection collectionLink = MongoDB.connect("link");
@@ -41,7 +45,7 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
 
     @Override
     protected List<GraphQLError> filterGraphQLErrors(List<GraphQLError> errors) {
-        System.out.println("HEREEEEEE");
+        log.info("filterGraphQLErrors");
         return errors.stream()
                 // .filter(e -> e instanceof ExceptionWhileDataFetching ||
                 // super.isClientError(e))

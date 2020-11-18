@@ -1,8 +1,8 @@
 package resolver;
 
 import com.coxautodev.graphql.tools.GraphQLRootResolver;
-import pojo.Link;
-import pojo.Person;
+import model.Link;
+import model.Person;
 import repository.LinkRepository;
 import repository.PersonRepository;
 
@@ -22,7 +22,7 @@ public class Query implements GraphQLRootResolver {
         return linkRepository.getAllLinks();
     }
 
-    public List<Person> allPersons(String name){
+    public List<Person> allPersons(String name) {
         return personRepository.getAllPersons(name);
     }
 }
