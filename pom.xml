@@ -21,17 +21,17 @@
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java</artifactId>
-            <version>17.4</version>
+            <version>22.3</version>
         </dependency>
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java-tools</artifactId>
-            <version>3.2.0</version>
+            <version>14.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java-servlet</artifactId>
-            <version>4.0.0</version>
+            <version>16.0.0</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
